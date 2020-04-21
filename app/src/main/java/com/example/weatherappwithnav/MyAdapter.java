@@ -52,10 +52,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         return vh;
     }
 
-    @NonNull
-
-
-    // Replace the contents of a view (invoked by the layout manager)
+    @NonNull            // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(MyViewHolder holder,final int position) {
         // - get element from your dataset at this position
@@ -76,10 +73,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         });
 
     }
-
-
-
-    // Return the size of your dataset (invoked by the layout manager)
+ // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
         return mDataset.size();
