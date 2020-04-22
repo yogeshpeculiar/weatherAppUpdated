@@ -1,6 +1,7 @@
 package com.example.weatherappwithnav;
 
 import android.os.AsyncTask;
+import android.widget.Toast;
 
 import com.android.volley.toolbox.JsonObjectRequest;
 
@@ -54,6 +55,7 @@ public JSONObject getTempApiResponse(String cityName){
     }
     public class GetTempFromApi extends AsyncTask<String, Void, String> {
 
+
         @Override
         protected String doInBackground(String... address) {
             try {
@@ -77,6 +79,16 @@ public JSONObject getTempApiResponse(String cityName){
                 e.printStackTrace();
             }
             return null;
+        }
+
+        @Override
+        protected void onPreExecute() {
+
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
         }
     }
 

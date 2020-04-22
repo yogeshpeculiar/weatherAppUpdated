@@ -1,10 +1,12 @@
 package com.example.weatherappwithnav;
 
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -19,12 +21,13 @@ public class GetCities {
     ArrayList<String> cityName=new ArrayList<>();
 
         String response = "";
+
        GetCityFromApi getCityFromApi=new GetCityFromApi();
         JSONObject jsonObject=null;
         JSONObject temp=null;
         try {
-            response = getCityFromApi.execute("https://api.openaq.org/v1/cities?country=IN&limit=10").get();
 
+            response = getCityFromApi.execute("https://api.openaq.org/v1/cities?country=IN&limit=10").get();
             jsonObject = new JSONObject(response);
             JSONArray jsonArray = jsonObject.getJSONArray("results");
             for(int i=2;i<jsonArray.length();i++) {
@@ -45,6 +48,18 @@ public class GetCities {
 
         }
         return null;
+    }
+    public String giveRawResponse(){
+        String response = "";
+        GetCityFromApi getCityFromApi=new GetCityFromApi();
+
+        try{
+            response = getCityFromApi.execute("https://api.openaq.org/v1/cities?country=IN&limit=10").get();
+        }
+        catch(Exception e){
+
+        }
+        return  response;
     }
     public class GetCityFromApi extends AsyncTask<String, Void, String> {
 
