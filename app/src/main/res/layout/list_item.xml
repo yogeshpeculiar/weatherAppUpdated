@@ -11,35 +11,34 @@
         android:layout_height="match_parent"
         android:layout_margin="4dp">
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:padding="2dp" />
+        <TextView
+            android:id="@+id/temp"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:text="citys temperature"
+
+            android:layout_marginLeft="16dp"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/temperature_circle"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center"
+            android:textColor="@android:color/white"
+            android:textSize="10sp"
+            />
+
 
         <TextView
             android:id="@+id/city"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_toEndOf="@+id/imageView"
+            android:layout_toEndOf="@+id/temp"
             android:text="Cityname"
             android:textColor="@android:color/black"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:layout_toRightOf="@+id/imageView" />
+            android:layout_toRightOf="@+id/temp" />
 
-        <TextView
-            android:id="@+id/temp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/city"
-            android:layout_marginStart="8dp"
-            android:layout_toEndOf="@+id/imageView"
-            android:text="citys temperature"
-            android:textSize="15sp"
-            android:layout_marginLeft="8dp"
-            android:layout_toRightOf="@+id/imageView" />
 
     </RelativeLayout>
 

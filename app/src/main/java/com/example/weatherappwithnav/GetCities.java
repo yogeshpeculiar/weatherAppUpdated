@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -72,15 +73,18 @@ public class GetCities {
                 connection.connect();
                 InputStream is = connection.getInputStream();
                 InputStreamReader isr = new InputStreamReader(is);
-                int data = isr.read();
-                String content = "";
-                char ch;
-                while(data != -1){
-                    ch = (char) data;
-                    content = content + ch;
-                    data  = isr.read();
+                BufferedReader bufferedReader=new BufferedReader(isr);
+                String line="";
+                StringBuilder content=new StringBuilder();
+                line=bufferedReader.readLine();
+                while(line!=null){
+                    content.append(line);
+                    line=bufferedReader.readLine();
                 }
-                return content;
+
+                char ch;
+
+                return content.toString();
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             } catch (IOException e) {

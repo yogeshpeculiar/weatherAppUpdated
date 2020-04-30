@@ -7,6 +7,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -64,15 +65,14 @@ public JSONObject getTempApiResponse(String cityName){
                 connection.connect();
                 InputStream is = connection.getInputStream();
                 InputStreamReader isr = new InputStreamReader(is);
-                int data = isr.read();
-                String content = "";
-                char ch;
-                while(data != -1){
-                    ch = (char) data;
-                    content = content + ch;
-                    data  = isr.read();
+                BufferedReader bufferedReader=new BufferedReader(isr);
+                String line=bufferedReader.readLine();
+                StringBuilder content=new StringBuilder();
+                while(line!=null){
+                    content.append(line);
+                    line=bufferedReader.readLine();
                 }
-                return content;
+                return content.toString();
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             } catch (IOException e) {

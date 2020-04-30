@@ -3,4 +3,15 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
+
+    <color name="temperature1">#4A7BA7</color>
+    <color name="temperature2">#04B4B3</color>
+    <color name="temperature3">#10CAC9</color>
+    <color name="temperature4">#F5A623</color>
+    <color name="temperature5">#FF7D50</color>
+    <color name="temperature6">#FC6644</color>
+    <color name="temperature7">#E75F40</color>
+    <color name="temperature8">#E13A20</color>
+    <color name="temperature9">#D93218</color>
+    <color name="temperature10">#C03823</color>
 </resources>

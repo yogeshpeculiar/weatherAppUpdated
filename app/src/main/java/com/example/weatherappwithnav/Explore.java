@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -36,6 +37,7 @@ public class Explore extends Fragment {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
+
 
     @Nullable
     @Override
@@ -140,6 +142,7 @@ public class Explore extends Fragment {
                     i--;
                 } else {
                     listItem.setCity(cities.get(i));
+
                     listItem.setTemperature(String.valueOf(temp));
                     listItem.setmImageResource(R.mipmap.ic_launcher);
                     listItems.add(listItem);
