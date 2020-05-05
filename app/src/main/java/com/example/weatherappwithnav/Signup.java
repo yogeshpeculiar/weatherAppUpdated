@@ -23,6 +23,7 @@ public class Signup extends AppCompatActivity {
     int i;
     Intent intent;
     Gson gson;
+    DbHelper dbHelper;
     PasswordProtect  passwordProtect=new PasswordProtect();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +35,7 @@ public class Signup extends AppCompatActivity {
         sharedPreferences=getSharedPreferences("userDetails",MODE_PRIVATE);
         editor=sharedPreferences.edit();
         gson=new Gson();
+        dbHelper=new DbHelper(this);
 
 
 
@@ -53,6 +55,15 @@ public class Signup extends AppCompatActivity {
 
         user.setPassword(encryptedPassword);
         user.setColorPreference(selectedColor.getText().toString());
+
+        //inserting the user data into the db
+       long result= dbHelper.insert(username.getText().toString(),encryptedPassword,selectedColor.getText().toString());
+       if(result!=-1)
+           Toast.makeText(this.getApplicationContext(),"data inserted in the db successfully",Toast.LENGTH_LONG).show();
+       else
+           Toast.makeText(this.getApplicationContext(),"data insertion failed",Toast.LENGTH_LONG).show();
+
+
 
         String userData=gson.toJson(user);
         editor.putString(String.valueOf(user.getUid()),userData);

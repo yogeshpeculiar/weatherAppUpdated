@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -18,6 +19,7 @@ public class Login extends AppCompatActivity {
 public EditText userName,passWord;
 public TextView signUp;
 Gson gson;
+DbHelper dbHelper;
     public SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     PasswordProtect  passwordProtect=new PasswordProtect();
@@ -31,6 +33,7 @@ Gson gson;
         sharedPreferences=getSharedPreferences("userDetails",MODE_PRIVATE);
         editor=sharedPreferences.edit();
         gson=new Gson();
+        dbHelper=new DbHelper(this);
 
 
     }
@@ -43,23 +46,34 @@ Gson gson;
         int size=sharedPreferences.getInt("userId",0);
         String username=userName.getText().toString();
         String password=passWord.getText().toString();
-        for(int i=1;i<size+1;i++) {
-            User user=new User();
 
-            if(sharedPreferences.contains(String.valueOf(i))){     //to check if the user id exists..
+        //checking the credentials via shared preference
+//        for(int i=1;i<size+1;i++) {
+//            User user=new User();
+//
+//            if(sharedPreferences.contains(String.valueOf(i))){     //to check if the user id exists..
+//
+//                    String userData=sharedPreferences.getString(String.valueOf(i),null);
+//                    user=gson.fromJson(userData,User.class);
+//                    decryptedPassword=passwordProtect.decrypt(user.getPassword(),"secretkey");
+//                    if(user.getUserName().equalsIgnoreCase(username)&&decryptedPassword.equalsIgnoreCase(String.valueOf(password))){
+//                        intent.putExtra("status","valid");
+//                        intent.putExtra("color",user.getColorPreference());
+//                        status=true;
+//
+//                        break;
+//                    }
+//                }
+//       }
 
-                    String userData=sharedPreferences.getString(String.valueOf(i),null);
-                    user=gson.fromJson(userData,User.class);
-                    decryptedPassword=passwordProtect.decrypt(user.getPassword(),"secretkey");
-                    if(user.getUserName().equalsIgnoreCase(username)&&decryptedPassword.equalsIgnoreCase(String.valueOf(password))){
-                        intent.putExtra("status","valid");
-                        intent.putExtra("color",user.getColorPreference());
-                        status=true;
-
-                        break;
-                    }
-                }
-       }
+        //checking the credentials via SQLite
+        Cursor c=dbHelper.get(username);
+        Toast.makeText(this.getApplicationContext(),"cursorcount."+String.valueOf(c.getCount()),Toast.LENGTH_LONG).show();
+        if(c.moveToFirst()) {
+            status = true;
+            intent.putExtra("status","valid");
+            intent.putExtra("color",c.getString(3));
+        }
         if(status)
         {
             setResult(1,intent);
