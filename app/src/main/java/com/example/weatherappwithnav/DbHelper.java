@@ -44,7 +44,12 @@ public class DbHelper extends SQLiteOpenHelper {
     }
     public Cursor get(String username){
         SQLiteDatabase db=this.getWritableDatabase();
-        Cursor c= db.rawQuery("select * from users where userName='"+username+"'",null);
+       //in order to avoid sqlInjecttion we ll prefer using method db.query()
+        // Cursor c= db.rawQuery("select * from users where userName='"+username+"'",null);
+        String whereClause="userNAme=?";
+        String[] whereArgs=new String[]{username};
+        Cursor c = db.query(tableName, null, whereClause, whereArgs,
+                null, null, null);
         return c;
     }
 }
