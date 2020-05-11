@@ -36,6 +36,14 @@
         android:textSize="25dp"
         android:text="New Here?  SIGNUP !"
         />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/weather_icon"
+        android:id="@+id/weather_image"
+
+        />
+    
 
 
 </LinearLayout>

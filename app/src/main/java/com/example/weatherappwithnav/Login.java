@@ -3,6 +3,9 @@ package com.example.weatherappwithnav;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.animation.Animator;
+import android.animation.AnimatorInflater;
+import android.animation.ValueAnimator;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -10,6 +13,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +22,7 @@ import com.google.gson.Gson;
 public class Login extends AppCompatActivity {
 public EditText userName,passWord;
 public TextView signUp;
+public ImageView weatherImage;
 Gson gson;
 DbHelper dbHelper;
     public SharedPreferences sharedPreferences;
@@ -34,7 +39,8 @@ DbHelper dbHelper;
         editor=sharedPreferences.edit();
         gson=new Gson();
         dbHelper=new DbHelper(this);
-
+        weatherImage=(ImageView)findViewById(R.id.weather_image);
+        fadeAnimation();
 
     }
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -90,5 +96,10 @@ DbHelper dbHelper;
     public void goToSignUp(View view){
             Intent intent=new Intent(this,Signup.class);
             startActivity(intent);
+    }
+    public void fadeAnimation(){
+        Animator fadeAnimator= AnimatorInflater.loadAnimator(this,R.animator.alpha);
+        fadeAnimator.setTarget(weatherImage);
+        fadeAnimator.start();
     }
 }
